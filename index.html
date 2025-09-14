@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Choose.</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      background: #000;
+      overflow: hidden;
+      position: relative;
+    }
+    h1 {
+      position: fixed;
+      top: 10px;
+      width: 100%;
+      text-align: center;
+      color: #fff;
+      z-index: 1000;
+      margin: 0;
+      font-size: 2rem;
+    }
+    .moving-img {
+      position: absolute;
+      width: 100px;
+      cursor: pointer;
+      user-select: none;
+      z-index: 1;
+    }
+    .focused {
+      width: 300px;
+      z-index: 999; /* bring to front */
+    }
+  </style>
+</head>
+<body>
+  <h1>Choose.</h1>
+
+  <!-- Link to the external JS file -->
+  <script src="scatter.js"></script>
+</body>
+</html>
+
