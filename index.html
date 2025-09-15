@@ -9,8 +9,51 @@
       margin: 0;
       background: #000;
       overflow: hidden;
-      position: relative;
     }
+
+    /* Password overlay */
+    #passwordOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 10000;
+      color: #fff;
+    }
+
+    #passwordOverlay input {
+      padding: 10px;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      border: none;
+      margin-bottom: 10px;
+    }
+
+    #passwordOverlay button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 5px;
+      border: none;
+      background: #fff;
+      color: #000;
+      font-weight: bold;
+    }
+
+    #errorMsg {
+        color: red;
+        visibility: hidden; /* always takes up space */
+        height: 1.2em;      /* reserve vertical space */
+        margin: 5px 0 0 0;  /* optional spacing */
+    }
+
+
     h1 {
       position: fixed;
       top: 10px;
@@ -36,8 +79,13 @@
 </head>
 <body>
   <h1>Choose.</h1>
+  <div id="passwordOverlay">
+    <h1>Enter Password</h1>
+    <input type="password" id="passwordInput" placeholder="Password">
+    <button id="passwordButton">Enter</button>
+    <p id="errorMsg" style="color:red; display:block;">Incorrect password</p>
+  </div>
 
-  <!-- Link to the external JS file -->
   <script src="scatter.js"></script>
 </body>
 </html>
