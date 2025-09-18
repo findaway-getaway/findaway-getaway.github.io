@@ -1,92 +1,190 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Choose.</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Findaway Getaway</title>
   <style>
     body {
-      font-family: system-ui, sans-serif;
       margin: 0;
-      background: #000;
-      overflow: hidden;
+      font-family: 'Helvetica Neue', sans-serif;
+      color: #2c2c2c;
+      background-color: #fff;
     }
-
-    /* Password overlay */
-    #passwordOverlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #000;
+    header {
+      background: url('headshot.avif') no-repeat center/cover;
+      height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      z-index: 10000;
-      color: #fff;
+      color: white;
+      text-align: center;
     }
-
-    #passwordOverlay input {
-      padding: 10px;
-      font-size: 1.2rem;
-      border-radius: 5px;
-      border: none;
-      margin-bottom: 10px;
+    header h1 {
+      font-size: 4rem;
+      letter-spacing: 2px;
     }
-
-    #passwordOverlay button {
-      padding: 10px 20px;
-      font-size: 1rem;
-      cursor: pointer;
-      border-radius: 5px;
-      border: none;
-      background: #fff;
-      color: #000;
+    header p {
+      font-size: 3rem;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      background: rgba(0,0,0,0.5);
+      padding: 1rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
       font-weight: bold;
     }
-
-    #errorMsg {
-        color: red;
-        visibility: hidden; /* always takes up space */
-        height: 1.2em;      /* reserve vertical space */
-        margin: 5px 0 0 0;  /* optional spacing */
-    }
-
-
-    h1 {
-      position: fixed;
-      top: 10px;
-      width: 100%;
+    section {
+      padding: 80px 20px;
       text-align: center;
-      color: #fff;
-      z-index: 1000;
-      margin: 0;
-      font-size: 2rem;
+      max-width: 1000px;
+      margin: auto;
     }
-    .moving-img {
-      position: absolute;
-      width: 100px;
-      cursor: pointer;
-      user-select: none;
-      z-index: 1;
+    section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
     }
-    .focused {
-      width: 300px;
-      z-index: 999; /* bring to front */
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: 30px;
+    }
+    .card {
+      background: #f9f9f9;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    .card img {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+    }
+    .card h3 {
+      margin: 15px;
+    }
+    .card p {
+      font-size: 1.5rem;
+      margin: 0 15px 20px;
+      color: #555;
+    }
+    footer {
+      background: #111;
+      color: #aaa;
+      padding: 30px;
+      text-align: center;
     }
   </style>
 </head>
 <body>
-  <h1>Choose.</h1>
-  <div id="passwordOverlay">
-    <h1>Enter Password</h1>
-    <input type="password" id="passwordInput" placeholder="Password">
-    <button id="passwordButton">Enter</button>
-    <p id="errorMsg" style="color:red; display:block;">Incorrect password</p>
-  </div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#rooms">Lodging</a>
+    <a href="#activities">Activities</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-  <script src="scatter.js"></script>
+  <header>
+    <h1>Findaway Getaway</h1>
+    <p>get away from it all</p>
+  </header>
+
+  <section id="about">
+      <h2>Welcome to Findaway</h2>
+      <p>
+      Nestled in the green mountains of Vermont, Findaway Getaway is a place to pause, breathe, and rediscover your rhythm.  
+      Surround yourself with serene forests, placid streams, and the quiet company of beavers, moose, and friends.  
+      Many guests say the stillness is deeper here than anywhere else — though sometimes the woods feel more watchful than expected.
+      <br><br>
+      We open our doors on <strong>January 16, 2025</strong> with warm nights by the fire and mulled cider.
+      </p>
+  </section>
+
+  <section id="rooms">
+      <h2>Lodging</h2>
+      <div class="grid">
+          <div class="card">
+              <img src="livingroom.avif" alt="Living room">
+              <h3>Shared Spaces</h3>
+              <p>
+              Cozy up in the living room for board games, storytelling, and socializing.
+              </p>
+          </div>
+          <div class="card">
+              <img src="patio.avif" alt="Patio">
+              <h3>Nature All Around</h3>
+              <p>
+              Step onto the patio for crisp air and sweeping views of the pond.  
+              Perfect for quiet reflection, morning coffee, or watching the treeline.
+              </p>
+          </div>
+          <div class="card">
+              <img src="booze.avif" alt="Beverages">
+              <h3>Evening Spirits</h3>
+              <p>
+              Craft cocktails, mulled cider, and whatever else strikes your fancy.
+              Raise a glass, swap a secret, and forget your troubles.
+              </p>
+          </div>
+      </div>
+  </section>
+
+  <section id="activities">
+      <h2>Activities</h2>
+      <p>
+      Our staff have prepared a program full of mindful practices, community gatherings, and shared meals.  
+      It'll be a weekend to remember.
+      </p>
+      <div class="grid">
+          <div class="card">
+              <img src="camelshump.webp" alt="Hike">
+              <h3>Daytime Hikes</h3>
+              <p>
+              Explore the Vermont woods together, spotting wildlife and telling tales.  
+              Make sure to stick to the trails!
+              </p>
+          </div>
+          <div class="card">
+              <img src="campfire.png" alt="Campfire">
+              <h3>Evening Campfire</h3>
+              <p>
+              Gather ‘round for games, music, and maybe one or two stories better left untold.  
+              </p>
+          </div>
+          <div class="card">
+              <img src="tarot.png" alt="Tarot cards">
+              <h3>Divination</h3>
+              <p>
+              See what your future holds.
+              </p>
+          </div>
+      </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Email: welcome@findaway.com (can we do something fun with an email address?)
+    </p>
+    <p>Phone: +1 (555) 555-5555</p>
+    <p>Location: 111 Findaway Lane, Hinesburg VT</p>
+  </section>
+
+  <footer>
+    <p>© 2025 Findaway Getaway. All Rights Reserved.</p>
+  </footer>
 </body>
 </html>
 
