@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="favicon.png">
+
   <title>Findaway Getaway</title>
   <style>
     body {
@@ -252,8 +254,19 @@
     document.getElementById('page2').style.display = (pageId === 'page2') ? 'block' : 'none';
   }
 </script>
-
 <script src="scatter.js"></script>
+<script>
+  // Wait until the page loads
+  document.addEventListener("DOMContentLoaded", () => {
+    const tarotImg = document.querySelector('img[alt="Tarot cards"]');
+    if (tarotImg) {
+      tarotImg.addEventListener("click", () => {
+        tarotImg.src = "tarot2.jpeg";
+      });
+    }
+  });
+</script>
+
 </body>
 </html>
 
