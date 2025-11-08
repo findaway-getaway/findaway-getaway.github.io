@@ -152,13 +152,9 @@
 </head>
 <body>
 
-<!-- Tab switch buttons -->
-<!-- <div id="tab-switch">
-  <button class="tab-btn" onclick="showPage('page1')">Findaway</button>
-  <button class="tab-btn" onclick="showPage('page2')">Choose</button>
-</div> -->
 
-<!-- Page 1 -->
+<!-- If you found this: 01101100 01101101 01100001 01101111 00100000 01101110 01100101 01110010 01100100 -->
+
 <div id="page1">
   <nav>
     <a href="#about">About</a>
@@ -228,7 +224,6 @@
   <section id="contact">
     <h2>Contact Us</h2>
     <p>Email: findaway_getaway@yahoo.com</p>
-    <!-- <p>Phone: +1 (555) 555-5555</p> -->
     <p>Location: 111 Findaway Lane, Hinesburg VT</p>
   </section>
 
@@ -236,36 +231,6 @@
     <p>© 2025 Findaway Getaway. All Rights Reserved.</p>
   </footer>
 </div>
-
-<!-- Page 2 -->
-<div id="page2">
-  <h1 class="page2-title">Choose.</h1>
-  <div id="passwordOverlay">
-    <h1>Enter Password</h1>
-    <input type="password" id="passwordInput" placeholder="Password">
-    <button id="passwordButton">Enter</button>
-    <p id="errorMsg">Incorrect password</p>
-  </div>
-</div>
-
-<script>
-  function showPage(pageId) {
-    document.getElementById('page1').style.display = (pageId === 'page1') ? 'block' : 'none';
-    document.getElementById('page2').style.display = (pageId === 'page2') ? 'block' : 'none';
-  }
-</script>
-<script src="scatter.js"></script>
-<script>
-  // Wait until the page loads
-  document.addEventListener("DOMContentLoaded", () => {
-    const tarotImg = document.querySelector('img[alt="Tarot cards"]');
-    if (tarotImg) {
-      tarotImg.addEventListener("click", () => {
-        tarotImg.src = "tarot2.jpeg";
-      });
-    }
-  });
-</script>
 
 </body>
 </html>
