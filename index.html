@@ -232,6 +232,17 @@
   </footer>
 </div>
 
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const tarotImg = document.querySelector('img[alt="Tarot cards"]');
+    if (tarotImg) {
+      tarotImg.addEventListener("click", () => {
+        tarotImg.src = "tarot2.jpeg";
+      });
+    }
+  });
+</script>
+
 </body>
 </html>
 
