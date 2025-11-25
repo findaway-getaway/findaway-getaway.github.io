@@ -26,7 +26,6 @@ if (button) {
 
 // Public init function so it can be called when Page 2 is shown
 function scatterInit() {
-
     // Avoid double-init if already scattered
     if (document.querySelector('.moving-img')) return;
 

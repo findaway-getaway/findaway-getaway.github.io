@@ -148,13 +148,55 @@
       z-index: 999; /* bring to front */
     }
 
+    /* Page3: text adventure */
+    #page3 {
+      background-color: #111;
+      color: #0f0;
+      font-family: monospace;
+      padding: 1rem;
+    }
+    #terminal {
+      height: 80vh;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      border: 1px solid #0f0;
+      padding: 5px;
+      margin-bottom: 10px;
+    }
+    #input-line {
+      display: flex;
+      align-items: center;
+    }
+    #input-line span { margin-right: 5px; }
+    #input-line input {
+      background: none;
+      border: 1px solid #0f0;
+      outline: none;
+      color: #0f0;
+      font-family: monospace;
+      flex-grow: 1;
+      padding: 5px;
+    }
+
   </style>
 </head>
 <body>
 
+<!-- Tab switch buttons -->
+<!-- <div id="tab-switch">
+  <button class="tab-btn" onclick="showPage('page1')">Findaway</button>
+  <button class="tab-btn" onclick="showPage('page2')">Choose</button>
+  <button class="tab-btn" onclick="showPage('page3')">You are lost</button>
+</div> -->
+<script>
+  function showPage(pageId) {
+    document.getElementById('page1').style.display = (pageId === 'page1') ? 'block' : 'none';
+    document.getElementById('page2').style.display = (pageId === 'page2') ? 'block' : 'none';
+    document.getElementById('page3').style.display = (pageId === 'page3') ? 'block' : 'none';
+  }
+</script>
 
-<!-- If you found this: 01101100 01101101 01100001 01101111 00100000 01101110 01100101 01110010 01100100 -->
-
+<!-- Page 1 -->
 <div id="page1">
   <nav>
     <a href="#about">About</a>
@@ -224,6 +266,7 @@
   <section id="contact">
     <h2>Contact Us</h2>
     <p>Email: findaway_getaway@yahoo.com</p>
+    <!-- <p>Phone: +1 (555) 555-5555</p> -->
     <p>Location: 111 Findaway Lane, Hinesburg VT</p>
   </section>
 
@@ -232,7 +275,21 @@
   </footer>
 </div>
 
+<!-- Page 2 -->
+<div id="page2">
+  <h1 class="page2-title">Choose.</h1>
+  <div id="passwordOverlay">
+    <h1>Enter Password</h1>
+    <input type="password" id="passwordInput" placeholder="Password">
+    <button id="passwordButton">Enter</button>
+    <p id="errorMsg">Incorrect password</p>
+  </div>
+</div>
+
+<script src="scatter.js"></script>
+
 <script>
+  // Wait until the page loads
   document.addEventListener("DOMContentLoaded", () => {
     const tarotImg = document.querySelector('img[alt="Tarot cards"]');
     if (tarotImg) {
@@ -242,6 +299,27 @@
     }
   });
 </script>
+
+<script>
+  // Wait until the page loads
+  document.addEventListener("DOMContentLoaded", () => {
+    const spiritImg = document.querySelector('img[alt="Beverages"]');
+    spiritImg.addEventListener("click", () => {
+      showPage('page3');
+    });
+  });
+</script>
+
+<!-- Page3 -->
+<div id="page3" class="page">
+  <h1>You Are Lost</h1>
+  <div id="terminal"></div>
+  <div id="input-line">
+    <span>&gt;</span>
+    <input id="terminal-input" type="text" />
+  </div>
+</div>
+<script src="adventure.js"></script>
 
 </body>
 </html>
