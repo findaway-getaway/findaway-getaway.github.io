@@ -6,7 +6,10 @@ const terminal_input = document.getElementById('terminal-input');
 const destination = 13;
 const hazards = [4, 9, 12];
 const edges = {
-    0: [ { f:[1,0], b:[1,0] } ],
+    0: [ 
+        { f:[1,0] }, 
+        { b:[1,0] }
+    ],
     1: [
         { f:[2,0], r:[10,2], b:[0,1] },
         { f:[0,1], l:[10,2], b:[2,0] },
@@ -76,6 +79,7 @@ const directionNames = { f:"forward", b:"backward", l:"left", r:"right" };
 let pos = 0;
 let orientation = 0;
 let prev_failed = false;
+let finalSequence = false;
 let finished = false;
 
 function print(text) {
@@ -153,12 +157,17 @@ function killPlayer() {
 
 function completePuzzle() {
     print("Before you is a cabin. Would you like to enter?");
-    finished = true;
+    finalSequence = true;
 }
 
 function processFinalSequence(inputCmd) {
+    if (finished) {
+        return;
+    }
+
     if (inputCmd == "yes" || inputCmd == "y") {
         print("You enter the cabin. (DISPLAY VICTORY MESSAGE? LINK TO SOMETHING?)");
+        finished = true;
     } else if (inputCmd == "no" || inputCmd == "n") {
         print("You are swallowed by the forest.");
         killPlayer();
@@ -214,7 +223,7 @@ terminal_input.addEventListener('keydown', e => {
             if (cmd == "DEBUG_CLEAR") {
                 localStorage.clear();
             }
-        } else if (finished) {
+        } else if (finalSequence) {
             processFinalSequence(cmd);
         } else {
             processTurn(cmd);
