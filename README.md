@@ -1,1 +1,3 @@
 # findaway-getaway.github.io
+
+Don't snoop! You might find something you aren't supposed to...
