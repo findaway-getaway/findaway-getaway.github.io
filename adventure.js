@@ -157,11 +157,13 @@ function completePuzzle() {
 }
 
 function processFinalSequence(inputCmd) {
-    if (inputCmd == "yes") {
+    if (inputCmd == "yes" || inputCmd == "y") {
         print("You enter the cabin. (DISPLAY VICTORY MESSAGE? LINK TO SOMETHING?)");
-    } else {
+    } else if (inputCmd == "no" || inputCmd == "n") {
         print("You are swallowed by the forest.");
         killPlayer();
+    } else {
+        print("Yes or no?");
     }
 }
 
@@ -209,6 +211,9 @@ terminal_input.addEventListener('keydown', e => {
 
         if (isLockedOut()) {
             print("You are dead. Come back tomorrow to try again.");
+            if (cmd == "DEBUG_CLEAR") {
+                localStorage.clear();
+            }
         } else if (finished) {
             processFinalSequence(cmd);
         } else {
