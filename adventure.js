@@ -79,8 +79,7 @@ const directionNames = { f:"forward", b:"backward", l:"left", r:"right" };
 let pos = 0;
 let orientation = 0;
 let prev_failed = false;
-let finalSequence = false;
-let finished = false;
+let finalSequence = 0;
 
 function print(text) {
     term.innerHTML += text + "\n";
@@ -125,7 +124,7 @@ function parseCommand(cmd) {
     if (["go left","left","l"].includes(cmd)) return "l";
     if (["go right","right","r"].includes(cmd)) return "r";
 
-    return "";
+    return cmd;
 }
 
 // Lockout helper
@@ -157,22 +156,53 @@ function killPlayer() {
 
 function completePuzzle() {
     print("Before you is a cabin. Would you like to enter?");
-    finalSequence = true;
+    finalSequence = 1;
+}
+
+function isYes(input) {
+    cmd = input.toLowerCase();
+    return cmd == "yes" || cmd == "y";
+}
+
+function isNo(input) {
+    cmd = input.toLowerCase();
+    return cmd == "no" || cmd == "n";
 }
 
 function processFinalSequence(inputCmd) {
-    if (finished) {
+    if (finalSequence == 1) {
+        if (isYes(inputCmd)) {
+            print("The door creaks open and you see a desk, covered in cobwebs. On the desk is a tattered and yellowed page. Do you read it?")
+            finalSequence = 2;
+        } else if (isNo(inputCmd)) {
+            print("You are swallowed by the forest.");
+            killPlayer();
+        } else {
+            print("Yes or no?");
+        }
+    } else if (finalSequence == 2) {
+        if (isYes(inputCmd)) {
+            print("\"Sorry we missed you! Send us an e-mail letting us know you missed us and we'll be sure to get back at our earliest convenience. And don't forget to come back in January!");
+            print(" - FG\"");
+            print("Would you like to leave?");
+            finalSequence = 3;
+        } else if (isNo(inputCmd)) {
+            print("There is nothing else interesting in the room. You feel an ethereal presence guiding you towards the desk. Do you read the note?");
+        } else {
+            print("Yes or no?");
+        }
+    } else if (finalSequence == 3) {
+        if (isYes(inputCmd)) {
+            print("The door is locked. There is no other way out; you are trapped.");
+            finalSequence = 5;
+        } else if (isNo(inputCmd)) {
+            print("You stay in the cabin.");
+            finalSequence = 5;
+        } else {
+            print("Yes or no?");
+        }
+    } else if (finalSequence == 5) {
         return;
-    }
-
-    if (inputCmd == "yes" || inputCmd == "y") {
-        print("You enter the cabin. (DISPLAY VICTORY MESSAGE? LINK TO SOMETHING?)");
-        finished = true;
-    } else if (inputCmd == "no" || inputCmd == "n") {
-        print("You are swallowed by the forest.");
-        killPlayer();
-    } else {
-        print("Yes or no?");
     }
 }
 
@@ -184,19 +214,21 @@ function processTurn(inputCmd) {
         msg = "That is not a valid option. " + msg;
     }
 
-    if (inputCmd === "help") {
-        prev_failed = false;
-        print("Type 'go forward/left/right/backward' to go in a direction.");
-        print(msg);
+    const cmd = parseCommand(inputCmd).toLowerCase();
+
+    if (cmd == "cry") {
+        print("You cry. The forest does not respond.");
         return;
+    } else if (cmd == "die") {
+        killPlayer();
+        return;
+    } else if (cmd == "look") {
+        print("Around you is a dark forest. What do you do?");
     }
 
-    const cmd = parseCommand(inputCmd);
-
-    if (!cmd || !(cmd in options)) {
+    if (!(cmd in options)) {
         prev_failed = true;
         print("That is not a valid option.");
-        print(msg);
         return;
     }
 
@@ -223,7 +255,7 @@ terminal_input.addEventListener('keydown', e => {
             if (cmd == "DEBUG_CLEAR") {
                 localStorage.clear();
             }
-        } else if (finalSequence) {
+        } else if (finalSequence > 0) {
             processFinalSequence(cmd);
         } else {
             processTurn(cmd);
@@ -237,7 +269,7 @@ if (isLockedOut()) {
     print("You are dead. Come back tomorrow to try again.");
     terminal_input.value = "";
 } else {
-    print("You are in a dark forest. Before you lies a path. What do you do? Type 'help' for options.");
+    print("You are in a dark forest. Before you lies a path. What do you do?");
     terminal_input.value = "";
     print(optionsToMessage(getOptions()));
 }
