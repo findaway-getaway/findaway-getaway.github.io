@@ -1,4 +1,5 @@
 // Get out of here and solve it the right way, coward. 
+// (inspecting the code isn't really in-bounds for the puzzle, but what can I do?)
 
 const term = document.getElementById('terminal');
 const terminal_input = document.getElementById('terminal-input');
@@ -149,9 +150,21 @@ function applyDailyLockout() {
     localStorage.setItem(LOCKOUT_KEY, todayString());
 }
 
+const titleElement = document.getElementById('adventureTitle');
+
+function setTitle(title) {
+    console.log("SETTING TITLE TO ", title);
+    titleElement.innerHTML = title;
+}
+
+if (isLockedOut()) {
+    setTitle("You Are Dead");
+}
+
 function killPlayer() {
     print("You have died! Chart a path before trying again. The forest is closed to you until tomorrow.");
     applyDailyLockout();
+    setTitle("You Are Dead");
 }
 
 function completePuzzle() {
@@ -194,9 +207,11 @@ function processFinalSequence(inputCmd) {
     } else if (finalSequence == 3) {
         if (isYes(inputCmd)) {
             print("The door is locked. There is no other way out; you are trapped.");
+            setTitle("You Are Trapped");
             finalSequence = 5;
         } else if (isNo(inputCmd)) {
             print("You stay in the cabin.");
+            setTitle("You Are Trapped");
             finalSequence = 5;
         } else {
             print("Yes or no?");
@@ -248,20 +263,24 @@ function processTurn(inputCmd) {
 terminal_input.addEventListener('keydown', e => {
     if (e.key === 'Enter') {
         const cmd = terminal_input.value;
-        print("> " + cmd);
-
-        if (isLockedOut()) {
-            print("You are dead. Come back tomorrow to try again.");
-            if (cmd == "DEBUG_CLEAR") {
-                localStorage.clear();
-            }
-        } else if (finalSequence > 0) {
-            processFinalSequence(cmd);
-        } else {
-            processTurn(cmd);
-        }
 
         terminal_input.value = "";
+
+        if (finalSequence == 5) {
+            return;
+        }
+
+        if (isLockedOut()) {
+            return;
+        } else {
+            print("> " + cmd);
+
+            if (finalSequence > 0) {
+                processFinalSequence(cmd);
+            } else {
+                processTurn(cmd);
+            }
+        }
     }
 });
 
