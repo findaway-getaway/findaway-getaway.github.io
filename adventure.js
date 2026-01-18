@@ -185,7 +185,7 @@ function isNo(input) {
 function processFinalSequence(inputCmd) {
     if (finalSequence == 1) {
         if (isYes(inputCmd)) {
-            print("The door creaks open and you see a desk, covered in cobwebs. On the desk is a tattered and yellowed page. Do you read it?")
+            print("The door doesn't budge; it's locked. There is a note posted on the door. Do you read it?");
             finalSequence = 2;
         } else if (isNo(inputCmd)) {
             print("You are swallowed by the forest.");
@@ -195,29 +195,15 @@ function processFinalSequence(inputCmd) {
         }
     } else if (finalSequence == 2) {
         if (isYes(inputCmd)) {
-            print("\"Sorry we missed you! Send us an e-mail letting us know you missed us and we'll be sure to get back at our earliest convenience. And don't forget to come back in January!");
-            print(" - FG\"");
-            print("Would you like to leave?");
+            print("\"The llama will strangle you. Consult the Findaway Guides to proceed.\"");
             finalSequence = 3;
         } else if (isNo(inputCmd)) {
-            print("There is nothing else interesting in the room. You feel an ethereal presence guiding you towards the desk. Do you read the note?");
+            print("You are swallowed by the forest.");
         } else {
             print("Yes or no?");
         }
     } else if (finalSequence == 3) {
-        if (isYes(inputCmd)) {
-            print("The door is locked. There is no other way out; you are trapped.");
-            setTitle("You Are Trapped");
-            finalSequence = 5;
-        } else if (isNo(inputCmd)) {
-            print("You stay in the cabin.");
-            setTitle("You Are Trapped");
-            finalSequence = 5;
-        } else {
-            print("Yes or no?");
-        }
-    } else if (finalSequence == 5) {
-        return;
+        return
     }
 }
 

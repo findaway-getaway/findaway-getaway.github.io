@@ -182,13 +182,6 @@
 </head>
 <body>
 
-<!-- Tab switch buttons -->
-<!-- <div id="tab-switch">
-  <button class="tab-btn" onclick="showPage('page1')">Findaway</button>
-  <button class="tab-btn" onclick="showPage('page2')">Choose</button>
-  <button class="tab-btn" onclick="showPage('page3')">You are lost</button>
-</div>
--->
 <script>
   function showPage(pageId) {
     document.getElementById('page1').style.display = (pageId === 'page1') ? 'block' : 'none';
@@ -296,6 +289,30 @@
     if (tarotImg) {
       tarotImg.addEventListener("click", () => {
         tarotImg.src = "tarot2.jpeg";
+      });
+    }
+  });
+</script>
+
+<script>
+  // Wait until the page loads
+  document.addEventListener("DOMContentLoaded", () => {
+    const tarotImg = document.querySelector('img[alt="Tarot cards"]');
+    if (tarotImg) {
+      tarotImg.addEventListener("click", () => {
+        tarotImg.src = "tarot2.jpeg";
+      });
+    }
+  });
+</script>
+
+<script>
+  // Wait until the page loads
+  document.addEventListener("DOMContentLoaded", () => {
+    const fireImg = document.querySelector('img[alt="Campfire"]');
+    if (fireImg) {
+      fireImg.addEventListener("click", () => {
+        showPage('page2');
       });
     }
   });
